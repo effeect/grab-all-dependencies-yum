@@ -11,8 +11,9 @@ def up_container(vmname,application):
     # Run a task to create a variable for the script
     subprocess.run(["docker", "exec", "temp_container", "/bin/sh" ,"-c", "./grab-files.sh"])
     subprocess.run(["docker" ,"cp" , "temp_container:/tmp/install-deps/install-deps.zip", "install-deps.zip"])
-
     subprocess.run(["docker","kill","temp_container"])
 
 if __name__ == "__main__":
-    up_container("centos:7.9.2009","docker-ce")
+    vm_user_input = input("Enter a CentOS/RHEL release (eg centos:7.9.2009) : ")
+    app_user_input = input("Enter a app to download offline (eg docker-ce), can do multiple inputs : ")
+    up_container(vm_user_input,app_user_input)
